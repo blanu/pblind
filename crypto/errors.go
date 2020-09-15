@@ -1,4 +1,4 @@
-package pblind
+package github.com/blanu/pblind/crypto
 
 import (
 	"errors"
