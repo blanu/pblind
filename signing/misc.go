@@ -1,4 +1,4 @@
-package pblind
+package signing
 
 import (
 	"crypto/elliptic"
@@ -20,8 +20,8 @@ func hashToPoint(curve elliptic.Curve, value []byte) (*big.Int, *big.Int, error)
 	)
 
 	// TODO: make constant time
-	// e.g. use https://eprint.iacr.org/2009/226.pdf
-	// not critical, since the function operates on public info
+	// E.g. use https://eprint.iacr.org/2009/226.pdf
+	// not critical, since the function operates on public Info
 
 	y := big.NewInt(0)
 
@@ -31,7 +31,7 @@ func hashToPoint(curve elliptic.Curve, value []byte) (*big.Int, *big.Int, error)
 			return nil, nil, err
 		}
 
-		// y^2 = x^3 - 3x + B
+		// Y^2 = X^3 - 3x + B
 
 		y.Mul(x, x)
 		y.Mod(y, params.P)
@@ -53,7 +53,7 @@ func hashToPoint(curve elliptic.Curve, value []byte) (*big.Int, *big.Int, error)
 		// final sanity check
 
 		if !curve.IsOnCurve(x, y) {
-			panic(errors.New("point not on curve, implementation error"))
+			panic(errors.New("point not on Curve, implementation error"))
 		}
 
 		return x, y, nil

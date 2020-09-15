@@ -1,4 +1,4 @@
-package pblind
+package signing
 
 import (
 	"crypto/elliptic"
@@ -42,11 +42,11 @@ func TestInteraction(t *testing.T) {
 
 				t.Log("testing interaction with:", sk, pk, message, infoStr)
 
-				// compute shared point based on public info
+				// compute shared point based on public Info
 
 				info, err := CompressInfo(curve, infoStr)
 				if err != nil {
-					t.Error("failed to compress info:", err)
+					t.Error("failed to compress Info:", err)
 				}
 
 				// complete interaction / signature derivation
@@ -108,8 +108,8 @@ func TestInteraction(t *testing.T) {
 
 func BenchmarkInteraction(b *testing.B) {
 
-	infoStr := []byte("info")
-	message := []byte("message")
+	infoStr := []byte("Info")
+	message := []byte("Message")
 	curve := elliptic.P256()
 
 	// generate key-pair
@@ -120,11 +120,11 @@ func BenchmarkInteraction(b *testing.B) {
 	}
 	pk := sk.GetPublicKey()
 
-	// compute shared point based on public info
+	// compute shared point based on public Info
 
 	info, err := CompressInfo(curve, infoStr)
 	if err != nil {
-		b.Error("failed to compress info:", err)
+		b.Error("failed to compress Info:", err)
 	}
 
 	for i := 0; i < b.N; i++ {
